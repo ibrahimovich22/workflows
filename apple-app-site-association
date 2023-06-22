@@ -8,12 +8,12 @@
         "_graphql",
         "about",
         "account",
-        "actions-beta",
+        "actions-beta"
       ],
       "excludedRepoPages": [
         "blob",
         "commits",
-        "graphs",
+        "graphs"
       ],
       "excludedRepoSearchPages": [
         "issues",

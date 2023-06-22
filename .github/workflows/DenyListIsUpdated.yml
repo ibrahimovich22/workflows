@@ -50,10 +50,11 @@ jobs:
       - name: Update denylistedFirstPathComponents
         run: |
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
-          excluded_products=$(echo "$excluded_products" | sed 's/\\/"/g')  # Remove backslashes
+          excluded_products=$(echo "$excluded_products" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g')  # Remove backslashes and escape double quotes
           denylistedFirstPathComponents="private let denylistedFirstPathComponents = Set([$excluded_products])"
-          sed -i "s#private let denylistedFirstPathComponents = Set([])#$denylistedFirstPathComponents#" New-Repository/GitHubURLRouteRegistry.swift
-
+          sed -i "s|private let denylistedFirstPathComponents = Set(\[\])|$denylistedFirstPathComponents|" New-Repository/GitHubURLRouteRegistry.swift
+        working-directory: ./New-Repository
+  
       - name: Commit and Push Changes
         run: |
           git config --global user.name "$(git config --get user.name)"

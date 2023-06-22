@@ -1,1 +1,60 @@
+name: Update deny list on clients
 
+on:
+  push:
+    branches:
+      - main  # Replace with the branch name you want to trigger the workflow on
+
+jobs:
+  update:
+    runs-on: ubuntu-latest  # Choose the appropriate runner environment
+
+    steps:
+      - name: Checkout First Repository
+        uses: actions/checkout@v2
+
+      - name: Determine File Changes
+        id: file_changes
+        run: |
+          echo "::set-output name=changes::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"
+
+      - name: Skip If No File Changes
+        run: |
+          if [ -z "${{ steps.file_changes.outputs.changes }}" ]; then
+            echo "No changes detected in the apple-app-site-association file. Skipping update."
+            exit 0
+          fi
+
+      - name: Read apple-app-site-association
+        id: read_aasa
+        run: |
+          content=$(cat apple-app-site-association)
+          echo "::set-output name=aasa_content::$content"
+
+      - name: Extract excludedProducts
+        id: extract_excluded_products
+        run: |
+          aasa_content="${{ steps.read_aasa.outputs.aasa_content }}"
+          excluded_products=$(echo $aasa_content | jq -r '.applinks.substitutionVariables.excludedProducts | map(. + "/") | join(", ")')
+          echo "::set-output name=excluded_products::$excluded_products"
+
+      - name: Checkout Second Repository
+        uses: actions/checkout@v2
+        with:
+          repository: New-Repository  # Replace with the name of the second repository
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update denylistedFirstPathComponents
+        run: |
+          excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
+          excluded_products=$(echo $excluded_products | sed 's/\\/"/g')  # Remove backslashes
+          denylistedFirstPathComponents="private let denylistedFirstPathComponents = Set([$excluded_products])"
+          sed -i "s/private let denylistedFirstPathComponents = Set([])/$denylistedFirstPathComponents/" New-Repository/GitHubURLRouteRegistry.swift
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.email "your-email@example.com"
+          git config user.name "Your Name"
+          git add New-Repository/GitHubURLRouteRegistry.swift
+          git commit -m "Update denylistedFirstPathComponents"
+          git push

@@ -55,7 +55,10 @@ jobs:
         run: |
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
           excluded_products=$(echo "$excluded_products" | sed 's/\\/"/g')  # Remove backslashes
+          echo "excluded_products: $excluded_products"
           denylistedFirstPathComponents="private let denylistedFirstPathComponents = Set([$excluded_products])"
+          echo "denylistedFirstPathComponents: $denylistedFirstPathComponents"
+          cat "New-repository/GithubURLRouteRegistry.swift"
           sed -i "s|private let denylistedFirstPathComponents = Set([])|$denylistedFirstPathComponents|" "New-repository/GithubURLRouteRegistry.swift"
         working-directory: ${{ github.workspace }}
   

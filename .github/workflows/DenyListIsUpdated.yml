@@ -35,6 +35,7 @@ jobs:
         id: extract_excluded_products
         run: |
           aasa_content=$(cat apple-app-site-association)
+          echo "aasa_content: $aasa_content"
           excluded_products=$(echo "$aasa_content" | jq -r '.applinks.substitutionVariables.excludedProducts[] | join(", ")')
           echo "::set-output name=excluded_products::$excluded_products"
 

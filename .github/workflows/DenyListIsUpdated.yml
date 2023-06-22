@@ -79,5 +79,6 @@ jobs:
           # Push the branch to the remote repository
           git push origin $branch_name
 
-          # Set the GH_TOKEN environment variable
-          echo "GH_TOKEN=${{ secrets.PAT_TOKEN }}" >> $GITHUB_ENV
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DE

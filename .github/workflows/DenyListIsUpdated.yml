@@ -56,35 +56,21 @@ jobs:
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
           excluded_products=$(echo "$excluded_products" | sed 's/\\/"/g')  # Remove backslashes
           echo "excluded_products: $excluded_products"
-          sed -i "s/private let denylistedFirstPathComponents = Set(\[.*\])/private let denylistedFirstPathComponents = Set([$excluded_products])/g" GithubURLRouteRegistry.swift
+          awk -v excluded_products="$excluded_products" '/private let denylistedFirstPathComponents = Set\(\[/ { print "private let denylistedFirstPathComponents = Set([" excluded_products "])"; next }1' GithubURLRouteRegistry.swift > temp.swift && mv temp.swift GithubURLRouteRegistry.swift
           cat "GithubURLRouteRegistry.swift"
           # Print the content of the modified file
           echo "Modified File Content:"
           cat "GithubURLRouteRegistry.swift"
+                    git config --global user.name Hubot
+          git config --global user.email hubot@users.noreply.github.com
+          git switch -c bump_version/$NEXT_VERSION
+          git add project.yml
+          git commit -m "Bump app version to $NEXT_VERSION"
+          git push origin bump_version/$NEXT_VERSION
+          gh pr create \
+            --title " Update deny list" \
+            --body "Update deny list" \
+            --base ${{ github.ref_name }} \
         working-directory: ${{ github.workspace }}
       
-      - name: Print File Content
-        run: |
-          cat GithubURLRouteRegistry.swift
-        working-directory: ${{ github.workspace }}
 
-      - name: Create Branch
-        run: |
-          git checkout -b feature/update-denylistedFirstPathComponents
-        working-directory: ${{ github.workspace }}
-
-      - name: Push Changes
-        run: |
-          git push origin feature/update-denylistedFirstPathComponents
-        working-directory: ${{ github.workspace }}
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.PAT_TOKEN }}
-          commit-message: Update denylistedFirstPathComponents
-          title: Update denylistedFirstPathComponents
-          body: |
-            This pull request updates the denylistedFirstPathComponents variable.
-          base: master
-          branch: feature/update-denylistedFirstPathComponents

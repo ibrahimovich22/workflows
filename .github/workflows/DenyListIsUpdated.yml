@@ -46,6 +46,10 @@ jobs:
           repository: esraaapady/New-Repository  # Replace with the name of the second repository
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Print Default Branch
+        run: |
+          echo "Default Branch: ${{ github.event.repository.default_branch }}"
+
       - name: Update denylistedFirstPathComponents
         run: |
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"

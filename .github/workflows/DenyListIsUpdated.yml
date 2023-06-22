@@ -55,8 +55,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config user.email "your-email@example.com"
-          git config user.name "Your Name"
-          git add New-Repository/GitHubURLRouteRegistry.swift
+          git config --global user.name "$(git config --get user.name)"
+          git config --global user.email "$(git config --get user.email)"
+          git add esraaapady/New-Repository/GitHubURLRouteRegistry.swift
           git commit -m "Update denylistedFirstPathComponents"
           git push

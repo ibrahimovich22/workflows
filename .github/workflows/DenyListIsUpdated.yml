@@ -66,7 +66,7 @@ jobs:
         run: |
           branch_name="feature/${{ github.event.pull_request.head.ref }}-update"
           git checkout -b $branch_name
-        working-directory: ${{ github.workspace
+        working-directory: ${{ github.workspace }}
 
       - name: Commit Changes
         run: |

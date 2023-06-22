@@ -57,6 +57,7 @@ jobs:
           excluded_products=$(echo "$excluded_products" | sed 's/\\/"/g')  # Remove backslashes
           echo "excluded_products: $excluded_products"
           awk -v excluded_products="$excluded_products" '/private let denylistedFirstPathComponents = Set\(\[/ { print "private let denylistedFirstPathComponents = Set([" excluded_products "])"; next }1' GithubURLRouteRegistry.swift > temp.swift && mv temp.swift GithubURLRouteRegistry.swift
+          # for testing, remove later
           cat "GithubURLRouteRegistry.swift"
 
           # Print the content of the modified file (remove later)

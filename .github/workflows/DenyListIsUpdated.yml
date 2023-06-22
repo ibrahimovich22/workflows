@@ -63,8 +63,8 @@ jobs:
           cat "GithubURLRouteRegistry.swift"
 
           # Configure git user for the repository
-          git config --global user.name esraa
-          git config --global user.email esraaapady@gmail.com
+          git config --global user.name Hubot
+          git config --global user.email hubot@users.noreply.github.com
 
           # Create a unique branch name
           branch_name="update/deny-file-$(date +'%s')"
@@ -79,7 +79,5 @@ jobs:
           # Push the branch to the remote repository
           git push origin $branch_name
 
-          # Create a pull request
-          gh pr create \
-            --title "Update deny list" \
-            --body "Update deny list"
+          # Set the GH_TOKEN environment variable
+          echo "GH_TOKEN=${{ secrets.PAT_TOKEN }}" >> $GITHUB_ENV

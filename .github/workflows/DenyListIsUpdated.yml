@@ -62,10 +62,20 @@ jobs:
           sed -i "s/let denylistedFirstPathComponents = Set(\[.*\])/let denylistedFirstPathComponents = Set([$excluded_products])/" "GithubURLRouteRegistry.swift"
         working-directory: ${{ github.workspace }}
   
-      - name: Commit and Push Changes
+      - name: Commit Changes
         run: |
           git config --global user.name "$(git config --get user.name)"
           git config --global user.email "$(git config --get user.email)"
-          git add esraaapady/New-Repository/GitHubURLRouteRegistry.swift
+          git add New-Repository/GitHubURLRouteRegistry.swift
           git commit -m "Update denylistedFirstPathComponents"
-          git push
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          commit-message: Update denylistedFirstPathComponents
+          title: Update denylistedFirstPathComponents
+          body: |
+            This pull request updates the denylistedFirstPathComponents variable.
+          base: main
+          branch: update-denylistedFirstPathComponents

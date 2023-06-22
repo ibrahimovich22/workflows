@@ -61,11 +61,16 @@ jobs:
           cat "GithubURLRouteRegistry.swift"
           sed -i "s/let denylistedFirstPathComponents = Set(\[.*\])/let denylistedFirstPathComponents = Set([$excluded_products])/" "GithubURLRouteRegistry.swift"
         working-directory: ${{ github.workspace }}
-  
+      
+      - name: Create Branch
+        run: |
+          branch_name="feature/${{ github.event.pull_request.head.ref }}-update"
+          git checkout -b $branch_name
+
       - name: Commit Changes
         run: |
-          git config --global user.name "$(git config --get user.name)"
-          git config --global user.email "$(git config --get user.email)"
+          git config --global user.email "esraaapady@gmail.com"
+          git config --global user.name "esraaapady"
           git add GithubURLRouteRegistry.swift
           git commit -m "Update denylistedFirstPathComponents"
 

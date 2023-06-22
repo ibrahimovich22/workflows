@@ -56,7 +56,7 @@ jobs:
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
           excluded_products=$(echo "$excluded_products" | sed 's/\\/"/g')  # Remove backslashes
           echo "excluded_products: $excluded_products"
-          sed -i "/private let denylistedFirstPathComponents = Set(\[/,/\]/ s/.*/private let denylistedFirstPathComponents = Set([$excluded_products])/g" GithubURLRouteRegistry.swift
+          sed -i "s/private let denylistedFirstPathComponents = Set(\[.*\])/private let denylistedFirstPathComponents = Set([$excluded_products])/g" GithubURLRouteRegistry.swift
           cat "GithubURLRouteRegistry.swift"
           # Print the content of the modified file
           echo "Modified File Content:"

@@ -86,5 +86,5 @@ jobs:
           title: Update denylistedFirstPathComponents
           body: |
             This pull request updates the denylistedFirstPathComponents variable.
-          base: main
+          base: master
           branch: feature/update-denylistedFirstPathComponents

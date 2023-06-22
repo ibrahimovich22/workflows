@@ -61,17 +61,25 @@ jobs:
           # Print the content of the modified file
           echo "Modified File Content:"
           cat "GithubURLRouteRegistry.swift"
-                    git config --global user.name Hubot
-          git config --global user.email hubot@users.noreply.github.com
-          #todo find unique branch name
-          git switch -c update/deny-file-0 
-          git add .
-          git commit -m "update deny file"
-          git push origin update/deny-file-0
-          gh pr create \
-            --title " Update deny list" \
-            --body "Update deny list" \
-            --base ${{ github.ref_name }} \
-        working-directory: ${{ github.workspace }}
-      
 
+          # Configure git user for the repository
+          git config --global user.name esraa
+          git config --global user.email esraaapady@gmail.com
+
+          # Create a unique branch name
+          branch_name="update/deny-file-$(date +'%s')"
+
+          # Create a new branch and switch to it
+          git switch -c $branch_name
+
+          # Stage and commit the changes
+          git add .
+          git commit -m "Update deny file"
+
+          # Push the branch to the remote repository
+          git push origin $branch_name
+
+          # Create a pull request
+          gh pr create \
+            --title "Update deny list" \
+            --body "Update deny list"

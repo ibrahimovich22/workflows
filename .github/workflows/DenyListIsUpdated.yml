@@ -70,16 +70,13 @@ jobs:
 
       - name: Create Branch
         run: |
-          branch_name="feature/${{ github.event.pull_request.head.ref }}-update"
-          git checkout -b $branch_name
+          git checkout -b feature/update-denylistedFirstPathComponents
         working-directory: ${{ github.workspace }}
 
-      - name: Commit Changes
+      - name: Push Changes
         run: |
-          git config --global user.email "esraaapady@gmail.com"
-          git config --global user.name "esraaapady"
-          git add GithubURLRouteRegistry.swift
-          git commit -m "Update denylistedFirstPathComponents"
+          git push origin feature/update-denylistedFirstPathComponents
+        working-directory: ${{ github.workspace }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -90,4 +87,4 @@ jobs:
           body: |
             This pull request updates the denylistedFirstPathComponents variable.
           base: main
-          branch: feature/${{ github.event.pull_request.head.ref }}-update
+          branch: feature/update-denylistedFirstPathComponents

@@ -62,6 +62,11 @@ jobs:
           sed -i "s/private let denylistedFirstPathComponents = Set(\[.*\])/private let denylistedFirstPathComponents = Set([$excluded_products])/" "GithubURLRouteRegistry.swift"
         working-directory: ${{ github.workspace }}
       
+      - name: Print File Content
+        run: |
+          cat New-Repository/GithubURLRouteRegistry.swift
+        working-directory: ${{ github.workspace }}
+
       - name: Create Branch
         run: |
           branch_name="feature/${{ github.event.pull_request.head.ref }}-update"

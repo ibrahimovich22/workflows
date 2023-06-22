@@ -3,11 +3,11 @@ name: Update deny list on clients
 on:
   push:
     branches:
-      - main  # Replace with the branch name you want to trigger the workflow on
+      - main
 
 jobs:
   update:
-    runs-on: ubuntu-latest  # Choose the appropriate runner environment
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout First Repository
@@ -43,7 +43,7 @@ jobs:
       - name: Checkout Second Repository
         uses: actions/checkout@v2
         with:
-          repository: New-Repository  # Replace with the name of the second repository
+          repository: esraaapady/New-Repository  # Replace with the name of the second repository
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update denylistedFirstPathComponents

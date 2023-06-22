@@ -58,8 +58,8 @@ jobs:
           echo "excluded_products: $excluded_products"
           denylistedFirstPathComponents="private let denylistedFirstPathComponents = Set([$excluded_products])"
           echo "denylistedFirstPathComponents: $denylistedFirstPathComponents"
-          cat "New-repository/GithubURLRouteRegistry.swift"
-          sed -i "s|private let denylistedFirstPathComponents = Set([])|$denylistedFirstPathComponents|" "New-repository/GithubURLRouteRegistry.swift"
+          cat "GithubURLRouteRegistry.swift"
+          sed -i "s|private let denylistedFirstPathComponents = Set([])|$denylistedFirstPathComponents|" "GithubURLRouteRegistry.swift"
         working-directory: ${{ github.workspace }}
   
       - name: Commit and Push Changes

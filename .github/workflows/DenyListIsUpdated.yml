@@ -1,4 +1,4 @@
-name: Update deny list on clients
+name: Update deny list on iOS Client
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
       - name: Checkout Second Repository
         uses: actions/checkout@v2
         with:
-          repository: esraaapady/New-Repository  # Replace with the name of the second repository
+          repository: esraaapady/New-Repository  # Replace with github/mobile-ios
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Print Current Working Directory
@@ -51,14 +51,15 @@ jobs:
           pwd
         working-directory: ${{ github.workspace }}
 
-      - name: Update denylistedFirstPathComponents
+      - name: Update denylistedFirstPathComponents Method
         run: |
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
           excluded_products=$(echo "$excluded_products" | sed 's/\\/"/g')  # Remove backslashes
           echo "excluded_products: $excluded_products"
           awk -v excluded_products="$excluded_products" '/private let denylistedFirstPathComponents = Set\(\[/ { print "private let denylistedFirstPathComponents = Set([" excluded_products "])"; next }1' GithubURLRouteRegistry.swift > temp.swift && mv temp.swift GithubURLRouteRegistry.swift
           cat "GithubURLRouteRegistry.swift"
-          # Print the content of the modified file
+
+          # Print the content of the modified file (remove later)
           echo "Modified File Content:"
           cat "GithubURLRouteRegistry.swift"
 
@@ -78,7 +79,3 @@ jobs:
 
           # Push the branch to the remote repository
           git push origin $branch_name
-
-      - name: Install GitHub CLI
-        run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DE

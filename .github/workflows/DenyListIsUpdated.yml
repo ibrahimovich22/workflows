@@ -58,8 +58,7 @@ jobs:
           echo "excluded_products: $excluded_products"
           sed -i "s/private let denylistedFirstPathComponents = Set(\[.*\])/private let denylistedFirstPathComponents = Set([$excluded_products])/" GithubURLRouteRegistry.swift
           cat "GithubURLRouteRegistry.swift"
-          sed -i "s/private let denylistedFirstPathComponents = Set(\[\])/$denylistedFirstPathComponents/" GithubURLRouteRegistry.swift
-                    # Print the content of the modified file
+          # Print the content of the modified file
           echo "Modified File Content:"
           cat "GithubURLRouteRegistry.swift"
         working-directory: ${{ github.workspace }}

@@ -46,6 +46,11 @@ jobs:
           repository: esraaapady/New-Repository  # Replace with the name of the second repository
           token: ${{ secrets.PAT_TOKEN }}
 
+      - name: Print Current Working Directory
+        run: |
+          pwd
+        working-directory: ${{ github.workspace }}
+
       - name: Update denylistedFirstPathComponents
         run: |
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"

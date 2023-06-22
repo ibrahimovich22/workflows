@@ -64,7 +64,7 @@ jobs:
       
       - name: Print File Content
         run: |
-          cat New-Repository/GithubURLRouteRegistry.swift
+          cat GithubURLRouteRegistry.swift
         working-directory: ${{ github.workspace }}
 
       - name: Create Branch

@@ -63,10 +63,11 @@ jobs:
           cat "GithubURLRouteRegistry.swift"
                     git config --global user.name Hubot
           git config --global user.email hubot@users.noreply.github.com
-          git switch -c bump_version/$NEXT_VERSION
-          git add project.yml
-          git commit -m "Bump app version to $NEXT_VERSION"
-          git push origin bump_version/$NEXT_VERSION
+          #todo find unique branch name
+          git switch -c update/deny-file-0 
+          git add .
+          git commit -m "update deny file"
+          git push origin update/deny-file-0
           gh pr create \
             --title " Update deny list" \
             --body "Update deny list" \

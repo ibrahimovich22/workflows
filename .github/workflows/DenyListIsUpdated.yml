@@ -36,7 +36,7 @@ jobs:
         run: |
           aasa_content=$(cat apple-app-site-association)
           echo "aasa_content: $aasa_content"
-          excluded_products=$(echo "$aasa_content" | jq -r '.applinks.substitutionVariables.excludedProducts[] | join(", ")')
+          excluded_products=$(echo "$aasa_content" | jq -r '.applinks.substitutionVariables.excludedProducts | join(", ")' | sed 's/\\/\\\\/g' | sed 's/"/\\"/g')
           echo "::set-output name=excluded_products::$excluded_products"
 
       - name: Checkout Second Repository

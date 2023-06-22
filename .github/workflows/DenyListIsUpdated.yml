@@ -90,4 +90,4 @@ jobs:
           body: |
             This pull request updates the denylistedFirstPathComponents variable.
           base: main
-          branch: update-denylistedFirstPathComponents
+          branch: feature/${{ github.event.pull_request.head.ref }}-update

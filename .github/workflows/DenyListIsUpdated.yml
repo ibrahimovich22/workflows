@@ -49,7 +49,7 @@ jobs:
       - name: Update denylistedFirstPathComponents
         run: |
           excluded_products="${{ steps.extract_excluded_products.outputs.excluded_products }}"
-          sed -i "s/let denylistedFirstPathComponents = Set(\[[^\]]*\])/let denylistedFirstPathComponents = Set([$excluded_products])/g" New-Repository/GitHubURLRouteRegistry.swift
+          sed -i "s/let denylistedFirstPathComponents = Set(\[[^\]]*\])/let denylistedFirstPathComponents = Set([$excluded_products])/g" ./New-Repository/GitHubURLRouteRegistry.swift
         working-directory: ${{ github.workspace }}
 
   

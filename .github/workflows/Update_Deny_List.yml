@@ -1,4 +1,4 @@
-name: Update deny list on iOS Client
+name: Update deny list on iOS Client test
 on:
   push:
     branches:

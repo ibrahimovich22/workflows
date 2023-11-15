@@ -1,1 +1,29 @@
-17
+rPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
+  repository(owner: $owner, name: $repo_name) {
+    id
+    deleteBranchOnMerge
+    name
+    viewerPermission
+    supportsTeamReviewRequests: planSupports(feature: TEAM_REVIEW_REQUESTS)
+    issueOrPullRequest(number: $number) {
+      ... on PullRequest {
+        id
+        title
+        pullRequestHtmlTitle: titleHTML
+        viewerCanEnableAutoMerge
+        viewerCanDisableAutoMerge
+        # viewerCanUpdateBranch
+        viewerCanChangeBaseBranch
+        actionRequiredWorkflowRunCount
+        number
+        isDraft
+        pullRequestState: state
+        baseRefName
+        headRefName
+        url
+        viewerCanDeleteHeadRef
+        viewerCanMergeAsAdmin
+      }
+    }
+  }
+}

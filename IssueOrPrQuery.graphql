@@ -27,4 +27,5 @@ query IssueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
     }
   }
 
+   one commit
 }

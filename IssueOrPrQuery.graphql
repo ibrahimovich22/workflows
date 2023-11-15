@@ -38,5 +38,6 @@ query IssueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
 999999
 101010101010
 11z11x11
+12.12.12
 
 }

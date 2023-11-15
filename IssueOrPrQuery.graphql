@@ -27,4 +27,3 @@ issueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
     }
   }
 }
-okay cool

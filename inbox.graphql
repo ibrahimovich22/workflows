@@ -22,11 +22,9 @@ query Inbox($first: Int!, $after: String, $filterBy: NotificationThreadFilters, 
 
 mutation UnsubscribeFromNotification($id: ID!, $notificationId: ID!, $state: SubscriptionState!) {
   updateSubscription(input: {subscribableId: $id, state: $state}) {
-    subscribable {
       id
       viewerSubscription
     }
-    ... on 
   }
   markNotificationAsDone(input: {id: $notificationId}) {
     success

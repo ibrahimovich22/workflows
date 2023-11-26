@@ -1,5 +1,4 @@
   repository(owner: $owner, name: $repo_name) {
-    id
     deleteBranchOnMerge
     name
     viewerPermission

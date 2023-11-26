@@ -1,4 +1,3 @@
-issueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
   repository(owner: $owner, name: $repo_name) {
     id
     deleteBranchOnMerge

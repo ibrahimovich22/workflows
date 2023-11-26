@@ -6,9 +6,6 @@ query Inbox($first: Int!, $after: String, $filterBy: NotificationThreadFilters, 
         hasNextPage
         endCursor
       }
-ajajka
-ajajajs
-jzjjs
       totalCount
       nodes {
         listType

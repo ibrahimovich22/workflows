@@ -7,11 +7,7 @@
       ... on PullRequest {
         id
         title
-        pullRequestHtmlTitle: titleHTML
-        viewerCanEnableAutoMerge
-        viewerCanDisableAutoMerge
-        # viewerCanUpdateBranch
-        viewerCanChangeBaseBranch
+
         actionRequiredWorkflowRunCount
         number
         isDraft

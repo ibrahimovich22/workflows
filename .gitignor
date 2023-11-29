@@ -27,8 +27,7 @@ line_length:
    - 300
    - 400
 function_body_length:
-  - 65 
-  - 90
+  - 65
 # they can set both implicitly with an array
 #type_body_length:
 #  - 300 # warning

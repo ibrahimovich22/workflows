@@ -19,7 +19,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
 # configurable rules can be customized from this configuration file
 # binary rules can set their severity level
 force_unwrapping: error
-#force_try:
+#for
 #  severity: warning # explicitly
 # rules that have both warning and error levels, can set just the warning level
 # implicitly

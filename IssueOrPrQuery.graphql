@@ -1,30 +1,135 @@
-query IssueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
-  repository(owner: $owner, name: $repo_name) {
-    id
-    deleteBranchOnMerge
-    name
-    viewerPermission
-    supportsTeamReviewRequests: planSupports(feature: TEAM_REVIEW_REQUESTS)
-    issueOrPullRequest(number: $number) {
-      ... on PullRequest {
-        id
-        title
-        pullRequestHtmlTitle: titleHTML
-        viewerCanEnableAutoMerge
-        viewerCanDisableAutoMerge
-        # viewerCanUpdateBranch
-        viewerCanChangeBaseBranch
-        actionRequiredWorkflowRunCount
-        number
-        isDraft
-        pullRequestState: state
-        baseRefName
-        headRefName
-        url
-        viewerCanDeleteHeadRef
-        viewerCanMergeAsAdmin
-      }
-    }
-  }
+cds
 
-}
+
+d
+
+das
+d
+
+
+
+
+
+
+
+
+d
+
+d
+d
+
+d
+d
+d
+
+d
+
+d
+d
+
+d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cdsdcscds,Vidal;c,so,dc;is
+cds
+
+
+d
+
+das
+d
+
+
+
+
+
+
+
+
+d
+
+d
+d
+
+d
+d
+d
+
+d
+
+d
+d
+
+d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cdsdcscds,Vidal;c,so,dc;is
+Davidcds@und ich sind in den letzten Wochen in the .=#

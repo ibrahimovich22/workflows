@@ -1,0 +1,33 @@
+query Inbox($first: Int!, $after: String, $filterBy: NotificationThreadFilters, $query: String) {
+  viewer {
+    id
+    notificationThreads(first: $first, after: $after, filterBy: $filterBy, query: $query) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      totalCount
+      nodes {
+        listType
+        threadType
+        subscriptionStatus
+        url
+        reason
+        isDone
+      }
+    }
+  }
+}
+
+
+mutation UnsubscribeFromNotification($id: ID!, $notificationId: ID!, $state: SubscriptionState!) {
+  updateSubscription(input: {subscribableId: $id, state: $state}) {
+      id
+      viewerSubscription
+    }
+  }
+  markNotificationAsDone(input: {id: $notificationId}) {
+    success
+  }
+}
+

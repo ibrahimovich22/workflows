@@ -1,6 +1,4 @@
-query IssueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
   repository(owner: $owner, name: $repo_name) {
-    id
     deleteBranchOnMerge
     name
     viewerPermission
@@ -9,11 +7,7 @@ query IssueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
       ... on PullRequest {
         id
         title
-        pullRequestHtmlTitle: titleHTML
-        viewerCanEnableAutoMerge
-        viewerCanDisableAutoMerge
-        # viewerCanUpdateBranch
-        viewerCanChangeBaseBranch
+
         actionRequiredWorkflowRunCount
         number
         isDraft
@@ -23,8 +17,3 @@ query IssueOrPullRequest($owner: String!, $repo_name: String!, $number: Int!) {
         url
         viewerCanDeleteHeadRef
         viewerCanMergeAsAdmin
-      }
-    }
-  }
-
-}
